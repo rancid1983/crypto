@@ -1,34 +1,33 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, {Fragment}  from "react";
+import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
 import Homepage from './Pages/Homepage';
-import CoinPage from './Pages/CoinPage';
-import { makeStyles } from '@mui/material';
+import CoinsPage from './Pages/CoinsPage';
 
 function App() {
+    return (
+        <BrowserRouter>
+            <Fragment>
+                <div>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/coins">Coins</Link>
+                            </li>
+                        </ul>
+                    </nav>
 
-const useStyles = makeStyles (()=> ({
-App: {
-backgoundColor: "#14161a",
-color: "white",
-minHeight: "100vh",
-}
-
-}));
-
-const classes = useStyles()
-
-  return (
-
-<BrowserRouter>
-<div className={classes.App}>
-  <Header/>
-  <Route path="/" component ={Homepage} exact />
-  <Route path="/coins/:id" component ={CoinPage} />
-</div>
-</BrowserRouter>
-  );
-    
-  }
+                    <Routes>
+                        <Route exact path='/coins' element={<CoinsPage/>}/>
+                        <Route exact path='/' element={<Homepage/>}/>
+                    </Routes>
+                </div>
+            </Fragment>
+        </BrowserRouter>
+    );
+};
 
 export default App;
